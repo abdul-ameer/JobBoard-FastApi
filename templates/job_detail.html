@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} – Job Board{% endblock %}
+{% block content %}
+  <div class="detail">
+    <div class="card">
+      <h2 style="margin:0 0 4px;">{{ job.title }}</h2>
+      <div class="meta">{{ job.company }} • {{ job.location }}</div>
+      <div class="hr"></div>
+      <p>{{ job.description }}</p>
+      {% if job.skills %}
+        <div class="hr"></div>
+        {% for s in job.skills.split(",") %}
+          <span class="tag">{{ s.strip() }}</span>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 8px;">Apply for this job</h3>
+      <form class="form" method="post" action="/jobs/{{ job.id }}/apply">
+        <input class="input" type="text" name="name" placeholder="Your Name" required>
+        <input class="input" type="email" name="email" placeholder="Your Email" required>
+        <textarea class="textarea" name="resume" placeholder="Paste Resume (or short cover note)" required></textarea>
+        <div class="form-actions">
+          <button class="btn" type="submit">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

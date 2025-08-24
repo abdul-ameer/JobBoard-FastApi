@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="/admin/dashboard">
+        <div class="brand-badge">JB</div> Admin Dashboard
+      </a>
+      <div class="table-actions">
+        <a class="btn-ghost" href="/">Site</a>
+        <a class="btn-ghost" href="/admin/logout">Logout</a>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="grid">
+      <div class="card">
+        <h3>Jobs Posted <span class="badge">Total</span></h3>
+        <div class="kpi">{{ total_jobs }}</div>
+        <div class="cell-muted">All active + archived</div>
+      </div>
+      <div class="card">
+        <h3>Applications <span class="badge">Total</span></h3>
+        <div class="kpi">{{ total_applications }}</div>
+        <div class="cell-muted">Submitted by candidates</div>
+      </div>
+    </div>
+
+    <!-- Jobs table -->
+    <h3 class="section-title">Job Listings</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title / Company</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Applications</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for job in jobs %}
+          <tr>
+            <td>{{ job.id }}</td>
+            <td>
+              <strong>{{ job.title }}</strong><br>
+              <span class="cell-muted">{{ job.company }}</span>
+            </td>
+            <td>{{ job.location or '-' }}</td>
+            <td class="cell-muted">
+              {% if job.description %}{{ job.description[:120] }}{% if job.description|length > 120 %}…{% endif %}{% else %}-{% endif %}
+            </td>
+            <td>{{ job.applications|length }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Applications table -->
+    <h3 class="section-title">Applications</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Applicant</th>
+            <th>Email</th>
+            <th>Job</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for app in applications %}
+          <tr>
+            <td>{{ app.id }}</td>
+            <td>{{ app.applicant_name }}</td>
+            <td class="cell-muted">{{ app.applicant_email }}</td>
+            <td>
+              {% if app.job %}
+                <strong>#{{ app.job.id }}</strong> – {{ app.job.title }}
+                <div class="cell-muted">{{ app.job.company }}</div>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</body>
+</html>

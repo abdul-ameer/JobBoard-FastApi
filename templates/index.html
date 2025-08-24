@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Jobs – Job Board{% endblock %}
+{% block content %}
+  <h2 style="margin:20px 2px;">Open Positions</h2>
+  <div class="grid">
+    {% for job in jobs %}
+      <div class="card">
+        <h3>{{ job.title }}</h3>
+        <div class="meta">{{ job.company }} • {{ job.location }}</div>
+        <div>
+          {% if job.description %}
+            <p class="muted">{{ job.description[:160] }}{% if job.description|length > 160 %}…{% endif %}</p>
+          {% endif %}
+        </div>
+        <div>
+          {% if job.skills %}
+            {% for s in job.skills.split(",") %}
+              <span class="tag">{{ s.strip() }}</span>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <div class="hr"></div>
+        <a class="btn" href="/jobs/{{ job.id }}">View Details</a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
