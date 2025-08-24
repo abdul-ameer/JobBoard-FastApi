@@ -1,7 +1,12 @@
 # 🚀 FastAPI Admin Dashboard
 
+
+
 A simple **FastAPI-based web application** with authentication, CRUD APIs, and an **admin dashboard** for managing records.  
 This project demonstrates building a scalable backend with FastAPI, PostgreSQL, and SQLAlchemy, along with a responsive UI using HTML and CSS.
+
+
+<img width="1549" height="852" alt="Screenshot from 2025-08-24 21-43-01" src="https://github.com/user-attachments/assets/e0dcc93a-a41e-452a-88a4-a355582f3e1f" />
 
 ---
 
@@ -23,10 +28,3 @@ This project demonstrates building a scalable backend with FastAPI, PostgreSQL, 
 - [HTML, CSS] – Frontend styling  
 
 ---
-
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone the repository
-```bash
-git clone https://github.com/your-username/fastapi-admin-dashboard.git
-cd fastapi-admin-dashboard
